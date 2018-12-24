@@ -67,9 +67,10 @@ exports.removeEvent = ({ params }, res) => {
 }
 
 const getEventsLogic = async (params, res) => {
-  console.log(1)
   try {
-    const data = await Date.findOne({ timeOfTheDay: params.id })
+    const data = (await Date.findOne({ timeOfTheDay: params.id })) || {
+      events: [],
+    }
     res.send({ data: data.events })
   } catch (e) {
     res.send({
@@ -84,9 +85,8 @@ exports.getEvents = ({ params }, res) => {
 
 const getEventLogic = async (params, res) => {
   try {
-    const data = await Date.findOne({ timeOfTheDay: params.id })
+    const data = (await Date.findOne({ timeOfTheDay: params.id })) || {}
     const dayTime = +params.day
-    console.log(params)
     res.send({ data: data.events.find(event => event.time === dayTime) })
   } catch (e) {
     res.send({
