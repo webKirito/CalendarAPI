@@ -25,6 +25,7 @@ app.disable('etag')
 app.use(cors())
 
 app.use('/api/', require('./routs/dateRouter'))
+app.use('/api/', require('./routs/eventsRouter'))
 
 const INITIAL_PORT = process.env.PORT || 3001
 
